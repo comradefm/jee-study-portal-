@@ -1,0 +1,24 @@
+{
+  "name": "JEE 2027 — 99 Percentile Mission",
+  "short_name": "JEE 2027",
+  "description": "Your personalized JEE 2027 preparation roadmap — from basics to 99 percentile in one attempt.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

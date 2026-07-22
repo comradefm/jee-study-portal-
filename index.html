@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>JEE 2027 — 99 Percentile Mission</title>
+  <meta name="description" content="Your personalized JEE 2027 preparation roadmap — from basics to 99 percentile in one attempt. Structured lessons, prerequisites, and daily study plans." />
+  <meta name="theme-color" content="#090d16" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="JEE 2027" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="badge">JEE 2027 &bull; ONE SHOT &bull; ONE GOAL</div>
+      <h1 class="hero-title">
+        <span class="gradient-text">99 Percentile</span><br/>
+        Mission Control
+      </h1>
+      <p class="hero-sub">From basics &rarr; JEE Advanced ready. 1 attempt. No compromises. No shortcuts.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-val" id="days-left">—</span>
+          <span class="stat-label">Days Left</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-val" id="topics-done">0</span>
+          <span class="stat-label">Topics Done</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-val" id="overall-pct">0%</span>
+          <span class="stat-label">Progress</span>
+        </div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="global-bar"></div>
+        </div>
+        <span class="progress-label">Syllabus Completion</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV TABS -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" id="btn-roadmap" onclick="switchTab('roadmap')">🗺 Roadmap</button>
+    <button class="tab-btn" id="btn-planner" onclick="switchTab('planner')">📅 Study Plan</button>
+    <button class="tab-btn" id="btn-physics" onclick="switchTab('physics')">⚡ Physics</button>
+    <button class="tab-btn" id="btn-chemistry" onclick="switchTab('chemistry')">🧪 Chemistry</button>
+    <button class="tab-btn" id="btn-math" onclick="switchTab('math')">📐 Math</button>
+    <button class="tab-btn" id="btn-milestones" onclick="switchTab('milestones')">🏆 Milestones</button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- ROADMAP TAB -->
+    <section class="tab-content active" id="tab-roadmap">
+      <div class="section-header">
+        <h2>Your 99 Percentile Roadmap</h2>
+        <p>The exact path — from where you are now to JEE 2027. Follow the order. Never skip prerequisites.</p>
+      </div>
+
+      <div class="phase-grid">
+
+        <div class="phase-card phase-1">
+          <div class="phase-badge">Phase 1</div>
+          <div class="phase-title">Foundation Reset</div>
+          <div class="phase-duration">Jul – Sep 2026 &bull; 3 Months</div>
+          <div class="phase-desc">Build the mathematical and conceptual foundation. Without this, everything else crumbles.</div>
+          <ul class="phase-list">
+            <li>Class 10 Math mastery (algebra, trig, geometry)</li>
+            <li>Intro to Calculus — limits, derivatives</li>
+            <li>Vectors and 2D geometry basics</li>
+            <li>Units, dimensions, basic mechanics (Physics)</li>
+            <li>Atomic structure, periodic table (Chemistry)</li>
+          </ul>
+          <div class="phase-goal">🎯 Goal: Comfortable with basics of all 3 subjects</div>
+        </div>
+
+        <div class="phase-card phase-2">
+          <div class="phase-badge">Phase 2</div>
+          <div class="phase-title">Class 11 Core Build</div>
+          <div class="phase-duration">Oct – Dec 2026 &bull; 3 Months</div>
+          <div class="phase-desc">Compress all high-weightage Class 11 chapters. Strategic — only what JEE actually tests.</div>
+          <ul class="phase-list">
+            <li>Math: Functions, Sequences, Binomial, P&amp;C</li>
+            <li>Physics: Kinematics, Laws of Motion, Work-Energy</li>
+            <li>Chemistry: Mole Concept, Chemical Bonding, Thermodynamics</li>
+          </ul>
+          <div class="phase-goal">🎯 Goal: Mock test — target 30–50 percentile</div>
+        </div>
+
+        <div class="phase-card phase-3">
+          <div class="phase-badge">Phase 3</div>
+          <div class="phase-title">Class 12 Powerhouse</div>
+          <div class="phase-duration">Jan – Mar 2027 &bull; 3 Months</div>
+          <div class="phase-desc">Class 12 topics carry the highest JEE weightage. This phase makes or breaks 99 percentile.</div>
+          <ul class="phase-list">
+            <li>Math: Calculus (deep dive), Probability, Coord. Geometry</li>
+            <li>Physics: Electrostatics, Current Electricity, Modern Physics</li>
+            <li>Chemistry: Organic reactions, Electrochemistry, Coordination</li>
+          </ul>
+          <div class="phase-goal">🎯 Goal: Mock tests — target 80–90 percentile</div>
+        </div>
+
+        <div class="phase-card phase-4">
+          <div class="phase-badge">Phase 4</div>
+          <div class="phase-title">JEE Crash Mode</div>
+          <div class="phase-duration">Apr – Jun 2027 &bull; 3 Months</div>
+          <div class="phase-desc">Full PYQ mode, mock marathon, revision sprints. Speed + accuracy optimization.</div>
+          <ul class="phase-list">
+            <li>PYQ solving — last 10 years, all chapters</li>
+            <li>Full mock tests every 3 days</li>
+            <li>Error analysis and weak topic targeting</li>
+            <li>Formula revision — 30 min daily</li>
+          </ul>
+          <div class="phase-goal">🎯 Goal: Consistent 95–99 percentile in mocks</div>
+        </div>
+
+      </div>
+
+      <div class="section-header" style="margin-top:3rem">
+        <h2>Prerequisite Chain</h2>
+        <p>Each topic unlocks the next. Learn in order — never skip a prerequisite.</p>
+      </div>
+      <div class="prereq-chain">
+        <div class="prereq-group">
+          <div class="prereq-title">⚡ PHYSICS PATH</div>
+          <div class="prereq-flow">
+            <div class="prereq-node start">Basic Math &amp; Trig</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Kinematics</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Newton's Laws</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Work &amp; Energy</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Rotation</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Electrostatics</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Current Elec.</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node jee-node">Modern Physics</div>
+          </div>
+        </div>
+        <div class="prereq-group">
+          <div class="prereq-title">📐 MATH PATH</div>
+          <div class="prereq-flow">
+            <div class="prereq-node start">Algebra Basics</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Functions</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Limits</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Derivatives</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Integration</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Diff. Equations</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Coord. Geometry</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node jee-node">3D &amp; Vectors</div>
+          </div>
+        </div>
+        <div class="prereq-group">
+          <div class="prereq-title">🧪 CHEMISTRY PATH</div>
+          <div class="prereq-flow">
+            <div class="prereq-node start">Atomic Structure</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Mole Concept</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Bonding</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Thermodynamics</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Equilibrium</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Electrochemistry</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node">Organic Basics</div>
+            <div class="prereq-arrow">&#8594;</div>
+            <div class="prereq-node jee-node">Named Reactions</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY PLANNER TAB -->
+    <section class="tab-content" id="tab-planner">
+      <div class="section-header">
+        <h2>Daily Study Schedule</h2>
+        <p>6–7 focused hours per day. Balanced across all 3 subjects. Sustainable all year.</p>
+      </div>
+      <div class="weekly-plan">
+        <div class="day-card">
+          <div class="day-name">Monday</div>
+          <div class="day-slots">
+            <div class="slot slot-math">📐 Math — 2.5 hrs<br/><small>New chapter + problem solving</small></div>
+            <div class="slot slot-physics">⚡ Physics — 2 hrs<br/><small>Theory + numericals</small></div>
+            <div class="slot slot-break">🧘 Break — 30 min</div>
+            <div class="slot slot-revision">🔁 Revision — 1 hr (previous topics)</div>
+          </div>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Tuesday</div>
+          <div class="day-slots">
+            <div class="slot slot-chemistry">🧪 Chemistry — 2.5 hrs<br/><small>New chapter + practice</small></div>
+            <div class="slot slot-math">📐 Math — 2 hrs<br/><small>Problems from previous chapter</small></div>
+            <div class="slot slot-break">🧘 Break — 30 min</div>
+            <div class="slot slot-revision">🔁 Revision — 1 hr</div>
+          </div>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Wednesday</div>
+          <div class="day-slots">
+            <div class="slot slot-physics">⚡ Physics — 2.5 hrs<br/><small>New chapter + numericals</small></div>
+            <div class="slot slot-chemistry">🧪 Chemistry — 2 hrs<br/><small>Practice &amp; revise</small></div>
+            <div class="slot slot-break">🧘 Break — 30 min</div>
+            <div class="slot slot-revision">🔁 Formula Drill — 1 hr</div>
+          </div>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Thursday</div>
+          <div class="day-slots">
+            <div class="slot slot-math">📐 Math — 3 hrs<br/><small>Deep problem solving session</small></div>
+            <div class="slot slot-physics">⚡ Physics — 2 hrs<br/><small>Concept + numerical</small></div>
+            <div class="slot slot-break">🧘 Break — 30 min</div>
+            <div class="slot slot-revision">🔁 PYQ Practice — 30 min</div>
+          </div>
+        </div>
+        <div class="day-card">
+          <div class="day-name">Friday</div>
+          <div class="day-slots">
+            <div class="slot slot-chemistry">🧪 Chemistry — 2.5 hrs<br/><small>Organic reactions focus</small></div>
+            <div class="slot slot-math">📐 Math — 1.5 hrs<br/><small>Weak topic targeting</small></div>
+            <div class="slot slot-break">🧘 Break — 30 min</div>
+            <div class="slot slot-revision">🔁 Weekly Revision — 1.5 hrs</div>
+          </div>
+        </div>
+        <div class="day-card day-weekend">
+          <div class="day-name">Saturday</div>
+          <div class="day-slots">
+            <div class="slot slot-mock">📝 Full Mock Test — 3 hrs (timed)</div>
+            <div class="slot slot-break">🧘 Break — 1 hr</div>
+            <div class="slot slot-revision">🔍 Error Analysis — 2 hrs<br/><small>Every mistake reviewed deeply</small></div>
+          </div>
+        </div>
+        <div class="day-card day-weekend">
+          <div class="day-name">Sunday</div>
+          <div class="day-slots">
+            <div class="slot slot-revision">🔁 Grand Revision — 2 hrs (all 3 subjects)</div>
+            <div class="slot slot-break">🧘 Rest &amp; Recovery — MANDATORY</div>
+            <div class="slot slot-math">📐 Math Hard Problems — 1.5 hrs</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-title">💡 99 Percentile Secrets</div>
+        <div class="tip-grid">
+          <div class="tip">🎯 <strong>Quality over Quantity</strong> — 6 focused hours beats 12 distracted hours every time</div>
+          <div class="tip">🧠 <strong>Active Recall</strong> — After studying, close the book and write what you remember</div>
+          <div class="tip">📊 <strong>Error Notebook</strong> — Track every mistake. Review it every Sunday</div>
+          <div class="tip">⏰ <strong>Pomodoro</strong> — 45 min study, 10 min break. Strict timer</div>
+          <div class="tip">🔄 <strong>Spaced Repetition</strong> — Revisit topics after 1 day, 1 week, 1 month</div>
+          <div class="tip">📱 <strong>Zero Phone</strong> — Use app blockers during study. Non-negotiable.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHYSICS TAB -->
+    <section class="tab-content" id="tab-physics">
+      <div class="section-header">
+        <h2>⚡ Physics Roadmap</h2>
+        <p>From basics to Advanced level. Tick each topic as you complete it. Progress saves automatically.</p>
+      </div>
+      <div class="subject-content" id="physics-content"></div>
+    </section>
+
+    <!-- CHEMISTRY TAB -->
+    <section class="tab-content" id="tab-chemistry">
+      <div class="section-header">
+        <h2>🧪 Chemistry Roadmap</h2>
+        <p>Physical, Inorganic, and Organic — in the exact right order for JEE.</p>
+      </div>
+      <div class="subject-content" id="chemistry-content"></div>
+    </section>
+
+    <!-- MATH TAB -->
+    <section class="tab-content" id="tab-math">
+      <div class="section-header">
+        <h2>📐 Mathematics Roadmap</h2>
+        <p>The backbone of JEE. Strong math = competitive advantage across all subjects.</p>
+      </div>
+      <div class="subject-content" id="math-content"></div>
+    </section>
+
+    <!-- MILESTONES TAB -->
+    <section class="tab-content" id="tab-milestones">
+      <div class="section-header">
+        <h2>🏆 Milestones &amp; Checkpoints</h2>
+        <p>Big goals on the journey to 99 percentile. Mark each one as you crush it.</p>
+      </div>
+      <div class="milestones-grid" id="milestones-grid"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>JEE 2027 &bull; One Shot &bull; 99 Percentile Mission 🔥</p>
+    <p class="footer-sub">All progress saved locally in your browser &bull; Keep cooking</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
