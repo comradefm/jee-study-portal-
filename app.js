@@ -1038,12 +1038,80 @@ function toggleMilestone(id) {
   renderMilestones();
 }
 
-// ============ STATS UPDATE ============
+// ============ EXAM TARGETS & COUNTDOWN ============
+
+const EXAM_TARGETS = {
+  mains1: { name: 'JEE Mains 2027 (Session 1)', date: '2027-01-24T09:00:00' },
+  mains2: { name: 'JEE Mains 2027 (Session 2)', date: '2027-04-04T09:00:00' },
+  advanced: { name: 'JEE Advanced 2027', date: '2027-05-23T09:00:00' }
+};
+
+function getSelectedTargetKey() {
+  return localStorage.getItem('jee_target_key') || 'mains1';
+}
+
+function getTargetDate() {
+  const key = getSelectedTargetKey();
+  if (key === 'custom') {
+    const customStr = localStorage.getItem('jee_custom_target_date');
+    if (customStr) return new Date(customStr + 'T09:00:00');
+    return new Date('2027-01-24T09:00:00');
+  }
+  return new Date((EXAM_TARGETS[key] || EXAM_TARGETS.mains1).date);
+}
+
+function changeTargetExam(val) {
+  localStorage.setItem('jee_target_key', val);
+  const customPicker = document.getElementById('custom-date-picker');
+  if (customPicker) {
+    customPicker.style.display = (val === 'custom') ? 'inline-block' : 'none';
+  }
+  updateCountdown();
+  updateStats();
+}
+
+function setCustomTargetDate(val) {
+  if (val) {
+    localStorage.setItem('jee_custom_target_date', val);
+    updateCountdown();
+    updateStats();
+  }
+}
+
+function updateCountdown() {
+  const targetDate = getTargetDate();
+  const now = new Date();
+  const diff = targetDate - now;
+
+  const el = document.getElementById('days-left');
+  if (el) {
+    if (diff <= 0) {
+      el.textContent = '🎯';
+    } else {
+      const days = Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+      el.textContent = days.toLocaleString();
+    }
+  }
+
+  // Update target title display
+  const key = getSelectedTargetKey();
+  const nameEl = document.getElementById('smart-target-name');
+  if (nameEl) {
+    if (key === 'custom') {
+      nameEl.textContent = 'Target: Custom (' + (localStorage.getItem('jee_custom_target_date') || 'Jan 24, 2027') + ')';
+    } else {
+      nameEl.textContent = 'Target: ' + (EXAM_TARGETS[key] ? EXAM_TARGETS[key].name : 'JEE Mains 2027');
+    }
+  }
+}
+
+// ============ STATS & ADAPTIVE PACE REDISTRIBUTOR ============
 
 function updateStats() {
   const allTopics = [...PHYSICS, ...CHEMISTRY, ...MATH];
   const totalTopics = allTopics.length;
   const doneCount = allTopics.filter(t => completedTopics[t.id]).length;
+  const remainingCount = totalTopics - doneCount;
   const pct = Math.round((doneCount / totalTopics) * 100);
 
   document.getElementById('topics-done').textContent = doneCount;
@@ -1051,23 +1119,76 @@ function updateStats() {
 
   const bar = document.getElementById('global-bar');
   if (bar) bar.style.width = pct + '%';
-}
 
-// ============ COUNTDOWN ============
-
-function updateCountdown() {
-  // JEE Mains 2027 approx date — Jan 15, 2027
-  const jeeDateMains = new Date('2027-01-15T09:00:00');
+  // Calculate Days Left for Pace
+  const targetDate = getTargetDate();
   const now = new Date();
-  const diff = jeeDateMains - now;
+  const diffMs = targetDate - now;
+  const daysLeft = Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60 * 24)));
 
-  const el = document.getElementById('days-left');
-  if (el) {
-    if (diff <= 0) {
-      el.textContent = '🎯';
+  // Pace calculations
+  const dailyPace = remainingCount > 0 ? (remainingCount / daysLeft).toFixed(2) : '0';
+  const weeklyPace = remainingCount > 0 ? ((remainingCount / daysLeft) * 7).toFixed(1) : '0';
+
+  const dailyEl = document.getElementById('daily-required-pace');
+  if (dailyEl) dailyEl.textContent = dailyPace;
+
+  const weeklyEl = document.getElementById('weekly-required-pace');
+  if (weeklyEl) weeklyEl.textContent = weeklyPace;
+
+  const remEl = document.getElementById('remaining-topics-count');
+  if (remEl) remEl.textContent = remainingCount;
+
+  // Estimated Finish Date if student maintains daily pace
+  const finishEl = document.getElementById('est-finish-date');
+  if (finishEl) {
+    if (remainingCount === 0) {
+      finishEl.textContent = 'Completed! 🎉';
     } else {
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      el.textContent = days.toLocaleString();
+      const finishDate = new Date();
+      finishDate.setDate(finishDate.getDate() + Math.ceil(remainingCount / Math.max(0.1, parseFloat(dailyPace))));
+      finishEl.textContent = finishDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    }
+  }
+
+  // Detect Missed Days & Update Pace Status Badge
+  const lastActiveStr = localStorage.getItem('jee_last_active_date');
+  const todayStr = new Date().toISOString().split('T')[0];
+  let missedDays = 0;
+
+  if (lastActiveStr) {
+    const lastActiveDate = new Date(lastActiveStr);
+    const timeDiff = new Date() - lastActiveDate;
+    missedDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  }
+
+  // Save active date
+  localStorage.setItem('jee_last_active_date', todayStr);
+
+  const badgeEl = document.getElementById('pace-status-badge');
+  const msgEl = document.getElementById('smart-pace-message');
+
+  if (badgeEl && msgEl) {
+    if (remainingCount === 0) {
+      badgeEl.className = 'pace-badge pace-on-track';
+      badgeEl.textContent = '🏆 Syllabus Complete';
+      msgEl.textContent = 'Incredible job! You have finished 100% of the JEE syllabus. Focus on mocks and revision!';
+    } else if (missedDays > 1) {
+      badgeEl.className = 'pace-badge pace-behind';
+      badgeEl.textContent = '⚡ Pace Auto-Redistributed';
+      msgEl.innerHTML = `<strong>Notice:</strong> You haven't checked off topics for ${missedDays} days. Your remaining ${remainingCount} chapters have been auto-redistributed across your ${daysLeft} remaining days. New daily target: <strong>${dailyPace} chapters/day</strong> (~${weeklyPace}/week).`;
+    } else if (parseFloat(dailyPace) <= 0.4) {
+      badgeEl.className = 'pace-badge pace-on-track';
+      badgeEl.textContent = '🟢 On Track';
+      msgEl.textContent = `You are on a comfortable pace! Covering ~${weeklyPace} chapters per week will finish your entire syllabus before your target exam date.`;
+    } else if (parseFloat(dailyPace) <= 0.7) {
+      badgeEl.className = 'pace-badge pace-moderate';
+      badgeEl.textContent = '🟡 Moderate Pace';
+      msgEl.textContent = `Target set: You need ${dailyPace} chapters/day (${weeklyPace} per week). Stay consistent with your daily study planner to maintain 99 percentile momentum!`;
+    } else {
+      badgeEl.className = 'pace-badge pace-behind';
+      badgeEl.textContent = '🔴 High Speed Required';
+      msgEl.textContent = `Heads up! To complete the remaining ${remainingCount} chapters on time, your target is ${dailyPace} chapters/day (${weeklyPace}/week). Focus on high-weightage topics first!`;
     }
   }
 }
@@ -1075,6 +1196,19 @@ function updateCountdown() {
 // ============ INIT ============
 
 function init() {
+  // Sync selected target dropdown UI
+  const savedTargetKey = getSelectedTargetKey();
+  const selectEl = document.getElementById('exam-target-select');
+  if (selectEl) selectEl.value = savedTargetKey;
+
+  if (savedTargetKey === 'custom') {
+    const customPicker = document.getElementById('custom-date-picker');
+    if (customPicker) {
+      customPicker.style.display = 'inline-block';
+      customPicker.value = localStorage.getItem('jee_custom_target_date') || '';
+    }
+  }
+
   updateCountdown();
   setInterval(updateCountdown, 60000);
 

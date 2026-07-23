@@ -178,6 +178,171 @@ body {
   animation: fadeUp 1s ease 0.4s both;
 }
 
+/* TARGET EXAM BAR */
+.target-exam-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.8rem;
+  animation: fadeUp 0.9s ease 0.25s both;
+  flex-wrap: wrap;
+}
+
+.target-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.target-select, .custom-date-input {
+  background: rgba(17, 24, 39, 0.8);
+  color: var(--text);
+  border: 1px solid var(--border2);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.target-select:hover, .target-select:focus, .custom-date-input:hover, .custom-date-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.25);
+}
+
+/* SMART ADAPTIVE PACE CARD */
+.smart-pace-card {
+  margin-top: 2rem;
+  background: rgba(15, 22, 36, 0.7);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 1.5rem;
+  text-align: left;
+  backdrop-filter: blur(20px);
+  animation: fadeUp 1s ease 0.45s both;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.smart-pace-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.smart-pace-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.smart-icon {
+  font-size: 1.4rem;
+  background: rgba(108, 99, 255, 0.15);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(108, 99, 255, 0.3);
+}
+
+.smart-pace-title strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.smart-pace-title small {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.pace-badge {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.pace-on-track {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--green);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+}
+
+.pace-moderate {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--yellow);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.pace-behind {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--red);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+}
+
+.smart-pace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pace-metric {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pace-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent2);
+}
+
+.pace-lbl {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 4px;
+}
+
+.smart-pace-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(108, 99, 255, 0.08);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.alert-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 .progress-bar-bg {
   width: 500px;
   max-width: 90vw;

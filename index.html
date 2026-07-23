@@ -29,6 +29,18 @@
         Mission Control
       </h1>
       <p class="hero-sub">From basics &rarr; JEE Advanced ready. 1 attempt. No compromises. No shortcuts.</p>
+      <!-- EXAM TARGET SELECTOR -->
+      <div class="target-exam-bar">
+        <label for="exam-target-select" class="target-label">🎯 Target Exam:</label>
+        <select id="exam-target-select" class="target-select" onchange="changeTargetExam(this.value)">
+          <option value="mains1">JEE Mains 2027 — Session 1 (Jan 24, 2027)</option>
+          <option value="mains2">JEE Mains 2027 — Session 2 (Apr 4, 2027)</option>
+          <option value="advanced">JEE Advanced 2027 (May 23, 2027)</option>
+          <option value="custom">Custom Date...</option>
+        </select>
+        <input type="date" id="custom-date-picker" class="custom-date-input" style="display:none" onchange="setCustomTargetDate(this.value)" />
+      </div>
+
       <div class="hero-stats">
         <div class="stat">
           <span class="stat-val" id="days-left">—</span>
@@ -50,6 +62,44 @@
           <div class="progress-bar-fill" id="global-bar"></div>
         </div>
         <span class="progress-label">Syllabus Completion</span>
+      </div>
+
+      <!-- ADAPTIVE SYLLABUS REDISTRIBUTOR -->
+      <div class="smart-pace-card">
+        <div class="smart-pace-top">
+          <div class="smart-pace-title">
+            <span class="smart-icon">⚡</span>
+            <div>
+              <strong>Adaptive Syllabus Pace</strong>
+              <small id="smart-target-name">Target: JEE Mains 2027 (Session 1)</small>
+            </div>
+          </div>
+          <span class="pace-badge pace-on-track" id="pace-status-badge">🟢 On Track</span>
+        </div>
+
+        <div class="smart-pace-grid">
+          <div class="pace-metric">
+            <span class="pace-val" id="daily-required-pace">0.4</span>
+            <span class="pace-lbl">Chapters / Day</span>
+          </div>
+          <div class="pace-metric">
+            <span class="pace-val" id="weekly-required-pace">2.6</span>
+            <span class="pace-lbl">Chapters / Week</span>
+          </div>
+          <div class="pace-metric">
+            <span class="pace-val" id="remaining-topics-count">54</span>
+            <span class="pace-lbl">Chapters Left</span>
+          </div>
+          <div class="pace-metric">
+            <span class="pace-val" id="est-finish-date">Jan 2027</span>
+            <span class="pace-lbl">Target Finish</span>
+          </div>
+        </div>
+
+        <div class="smart-pace-alert" id="smart-pace-alert-box">
+          <span class="alert-icon">💡</span>
+          <span id="smart-pace-message">Your syllabus is automatically divided across remaining days. Skip a day? The daily pace auto-recalculates so you stay 100% on target for 99 percentile!</span>
+        </div>
       </div>
     </div>
   </header>
