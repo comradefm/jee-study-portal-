@@ -1038,6 +1038,532 @@ function toggleMilestone(id) {
   renderMilestones();
 }
 
+// ============ WEIGHTAGE DATA ============
+
+const WEIGHTAGE_DATA = [
+  // ============ PHYSICS ============
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', expertTag: 'Dr. Arjun Mehta — Physics Resource Person', tier: 1,
+    name: 'Electrostatics & Capacitance',
+    weightage: '10–12%',
+    desc: 'This chapter alone can put you 12 marks ahead. 3–4 questions per paper without fail.',
+    resources: ['NCERT 12 Ch1-2', 'HC Verma Vol2 Ch29-31', 'DC Pandey Electrostatics'],
+    subtopics: [
+      { name: "Coulomb's Law — force between multiple charges", priority: 'Highest' },
+      { name: 'Electric field due to point charge, ring, disc, shell, wire', priority: 'Highest' },
+      { name: 'Electric dipole — field, torque, potential energy', priority: 'Highest' },
+      { name: "Gauss's Law — sphere, cylinder, plane applications", priority: 'Highest' },
+      { name: 'Electric potential — relation with field, equipotential', priority: 'Highest' },
+      { name: 'Parallel plate capacitor — with/without dielectric', priority: 'Highest' },
+      { name: 'Energy stored in capacitor', priority: 'Highest' },
+      { name: 'Series & Parallel capacitor combinations', priority: 'Highest' },
+      { name: 'RC Circuits — charging, discharging, time constant', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', tier: 1,
+    name: 'Current Electricity',
+    weightage: '8–12%',
+    desc: 'Every JEE paper has 3–4 circuit problems. Master Kirchhoff\'s Laws = easy 12 marks.',
+    resources: ['HC Verma Vol2 Ch32-33', 'DC Pandey', 'NCERT 12 Ch3'],
+    subtopics: [
+      { name: "Ohm's Law, resistivity, temperature dependence", priority: 'Highest' },
+      { name: 'Series & Parallel resistance — complex networks', priority: 'Highest' },
+      { name: "Kirchhoff's Current Law (KCL) & Voltage Law (KVL)", priority: 'Highest' },
+      { name: 'Wheatstone Bridge — balance condition', priority: 'Highest' },
+      { name: 'Meter Bridge — finding unknown resistance', priority: 'Highest' },
+      { name: 'Potentiometer — EMF comparison, internal resistance', priority: 'Highest' },
+      { name: 'Galvanometer → Ammeter/Voltmeter conversion', priority: 'High' },
+      { name: 'RC Circuits — time constant', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', tier: 1,
+    name: 'Modern Physics',
+    weightage: '8–10%',
+    desc: 'Easiest scoring chapter. Pure formula + concept. Students who skip this lose free marks.',
+    resources: ['NCERT 12 Ch11-14', 'HC Verma Vol2 Ch43-45'],
+    subtopics: [
+      { name: 'Photoelectric Effect — stopping potential, threshold frequency', priority: 'Highest' },
+      { name: 'de Broglie wavelength — matter waves', priority: 'Highest' },
+      { name: "Bohr's Model — energy levels, transitions", priority: 'Highest' },
+      { name: 'Spectral series — Lyman, Balmer, Paschen', priority: 'Highest' },
+      { name: 'Radioactive decay — alpha, beta, gamma', priority: 'Highest' },
+      { name: 'Half-life, mean life, decay constant calculations', priority: 'Highest' },
+      { name: 'Mass-energy equivalence — Q-value of nuclear reactions', priority: 'Highest' },
+      { name: 'p-n junction, diode, rectifier, Zener diode (Mains only)', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', tier: 2,
+    name: 'Kinematics & Laws of Motion',
+    weightage: '~15%',
+    desc: 'The backbone. If Mechanics is shaky, Physics is shaky. FBD is the #1 skill.',
+    resources: ['HC Verma Vol1 Ch3-6', 'DC Pandey Mechanics Part1'],
+    subtopics: [
+      { name: 'Equations of motion — constant acceleration', priority: 'Highest' },
+      { name: 'Relative velocity — 1D and 2D', priority: 'Highest' },
+      { name: 'Projectile motion — range, height, time', priority: 'Highest' },
+      { name: 'Free Body Diagram (FBD) — the #1 skill in Physics', priority: 'Highest' },
+      { name: 'Static & Kinetic Friction — angle of friction', priority: 'Highest' },
+      { name: 'Pulleys — Atwood machine, two-block systems', priority: 'Highest' },
+      { name: 'Pseudo force in non-inertial frames', priority: 'High' },
+    ]
+  },
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', tier: 2,
+    name: 'Rotational Motion',
+    weightage: '8–10%',
+    desc: 'Most students fear this. Master it and you\'re above 95% of competitors.',
+    resources: ['HC Verma Vol1 Ch10', 'NCERT 11 Ch7'],
+    subtopics: [
+      { name: 'Torque — calculation for various configurations', priority: 'Highest' },
+      { name: 'Moment of Inertia — rod, disc, ring, sphere', priority: 'Highest' },
+      { name: 'Parallel Axis Theorem', priority: 'Highest' },
+      { name: 'Angular momentum — conservation', priority: 'Highest' },
+      { name: 'Rolling without slipping — conditions', priority: 'Highest' },
+      { name: 'Rolling on inclined planes', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', tier: 2,
+    name: 'Optics — Ray & Wave',
+    weightage: '10–15%',
+    desc: '3–4 questions per paper. YDSE appears in almost every single paper.',
+    resources: ['HC Verma Vol2 Ch17-20', 'NCERT 12 Ch9-10'],
+    subtopics: [
+      { name: "Reflection from plane & spherical mirrors — mirror formula", priority: 'Highest' },
+      { name: "Refraction — Snell's Law, refractive index", priority: 'Highest' },
+      { name: 'Total Internal Reflection (TIR) — critical angle', priority: 'Highest' },
+      { name: 'Lens maker\'s equation, thin lens formula, combination of lenses', priority: 'Highest' },
+      { name: 'Prism — deviation, dispersion, minimum deviation', priority: 'Highest' },
+      { name: "Young's Double Slit Experiment (YDSE) — fringe width, shift", priority: 'Highest' },
+      { name: 'Interference — conditions, path difference', priority: 'Highest' },
+      { name: 'Single slit diffraction — central maxima width', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', tier: 2,
+    name: 'Thermodynamics & Kinetic Theory',
+    weightage: '8–10%',
+    desc: 'Process-based numericals + Carnot engine efficiency. Very predictable questions.',
+    resources: ['NCERT 11 Ch12-13', 'HC Verma Vol2 Ch26-27'],
+    subtopics: [
+      { name: 'First Law — internal energy, enthalpy', priority: 'Highest' },
+      { name: 'Isothermal, Adiabatic, Isochoric, Isobaric processes + Work done', priority: 'Highest' },
+      { name: 'Carnot Engine — efficiency formula', priority: 'Highest' },
+      { name: 'Kinetic Theory — RMS speed, average speed', priority: 'Highest' },
+      { name: 'Degrees of freedom — Cv, Cp, gamma for mono/di/poly', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'physics', icon: '⚡', label: 'Physics', tier: 3,
+    name: 'EMI, AC Circuits & Magnetism',
+    weightage: '8–10%',
+    desc: 'Score boosters — Faraday, Lenz, RLC circuits, motional EMF.',
+    resources: ['HC Verma Vol2 Ch34-38', 'NCERT 12 Ch6-8'],
+    subtopics: [
+      { name: "Faraday's Laws & Lenz's Law", priority: 'Highest' },
+      { name: 'Motional EMF — self & mutual inductance', priority: 'Highest' },
+      { name: 'Biot-Savart Law — wire, loop, solenoid', priority: 'Highest' },
+      { name: 'RLC series circuit — resonance, impedance', priority: 'Highest' },
+      { name: 'Cyclotron — motion of charged particle in B field', priority: 'High' },
+    ]
+  },
+
+  // ============ CHEMISTRY ============
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', expertTag: 'Dr. Priya Nair — Chemistry Resource Person', tier: 1,
+    name: 'Chemical Thermodynamics',
+    weightage: '8–10%',
+    desc: '3–4 questions every year without fail. Pure numerical + conceptual mix.',
+    resources: ['NCERT 11 Ch6', 'OP Tandon Physical'],
+    subtopics: [
+      { name: 'Internal energy (U), Enthalpy (H) — relation', priority: 'Highest' },
+      { name: 'Heat at constant volume (Cv) and constant pressure (Cp)', priority: 'Highest' },
+      { name: "Hess's Law — formation, combustion enthalpy", priority: 'Highest' },
+      { name: 'Bond dissociation energy calculations', priority: 'Highest' },
+      { name: 'Entropy — disorder, spontaneity criteria', priority: 'Highest' },
+      { name: 'ΔG = ΔH – TΔS — Gibbs free energy', priority: 'Highest' },
+      { name: 'ΔG° = –RT ln K — relation with equilibrium constant', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 1,
+    name: 'Chemical Equilibrium (Chemical + Ionic)',
+    weightage: '6–8%',
+    desc: 'Kc, Kp, Le Chatelier, pH of buffers — this chapter is a goldmine if understood well.',
+    resources: ['NCERT 11 Ch7', 'VK Jaiswal Inorganic'],
+    subtopics: [
+      { name: 'Law of Mass Action — Kc, Kp, Kx definitions', priority: 'Highest' },
+      { name: 'Kp = Kc(RT)^Δn — derivation and use', priority: 'Highest' },
+      { name: "Le Chatelier's Principle — effect of T, P, concentration", priority: 'Highest' },
+      { name: 'Degree of dissociation calculations', priority: 'Highest' },
+      { name: 'Ionic equilibrium — pH of weak acid/base', priority: 'Highest' },
+      { name: 'Buffer solutions — Henderson-Hasselbalch equation', priority: 'Highest' },
+      { name: 'Solubility product (Ksp) — precipitation condition', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 1,
+    name: 'Electrochemistry',
+    weightage: '6–8%',
+    desc: 'Nernst equation + Faraday\'s Laws guarantee 2–3 questions per paper.',
+    resources: ['NCERT 12 Ch3', 'OP Tandon'],
+    subtopics: [
+      { name: 'Galvanic vs Electrolytic cells — working', priority: 'Highest' },
+      { name: 'Standard electrode potential — SHE reference', priority: 'Highest' },
+      { name: 'Ecell = E°cathode – E°anode', priority: 'Highest' },
+      { name: 'Nernst Equation — concentration effect on EMF', priority: 'Highest' },
+      { name: "Faraday's Laws of Electrolysis (1st and 2nd)", priority: 'Highest' },
+      { name: 'Electrolytic products — prediction at cathode/anode', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 1,
+    name: 'Chemical Kinetics',
+    weightage: '6–8%',
+    desc: 'Rate laws, integrated equations, and Arrhenius — all high-frequency question patterns.',
+    resources: ['NCERT 12 Ch4', 'N. Awasthi Physical'],
+    subtopics: [
+      { name: 'Rate of reaction — average & instantaneous rate', priority: 'Highest' },
+      { name: 'Order & Molecularity — difference + determination', priority: 'Highest' },
+      { name: 'Zero order, First order — integrated rate equations', priority: 'Highest' },
+      { name: 'Half-life — first order: t½ = 0.693/k', priority: 'Highest' },
+      { name: 'Arrhenius equation — activation energy, temperature effect', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 2,
+    name: 'General Organic Chemistry (GOC)',
+    weightage: '5–7%',
+    desc: 'THE FOUNDATION. Skip GOC = fail Organic. This gives tools to solve every reaction.',
+    resources: ['MS Chauhan Organic', 'NCERT 11 Ch12'],
+    subtopics: [
+      { name: 'IUPAC Nomenclature — all functional group classes', priority: 'Highest' },
+      { name: 'Inductive Effect (–I, +I) and its applications', priority: 'Highest' },
+      { name: 'Resonance / Mesomeric Effect', priority: 'Highest' },
+      { name: 'Hyperconjugation — stability of carbocations', priority: 'Highest' },
+      { name: 'Carbocation, Carbanion, Free Radical stability orders', priority: 'Highest' },
+      { name: 'Acidity & Basicity comparison using electronic effects', priority: 'Highest' },
+      { name: "Aromaticity — Hückel's rule (4n+2 π electrons)", priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 2,
+    name: 'Aldehydes, Ketones & Carboxylic Acids',
+    weightage: '6–8%',
+    desc: 'Every JEE paper has 2–3 questions here. Named reactions = free marks if memorized.',
+    resources: ['MS Chauhan Organic', 'NCERT 12 Ch12'],
+    subtopics: [
+      { name: 'Nucleophilic addition — mechanism for aldehydes vs ketones', priority: 'Highest' },
+      { name: 'Aldol Condensation — conditions, products', priority: 'Highest' },
+      { name: 'Cannizzaro Reaction — when and why it occurs', priority: 'Highest' },
+      { name: 'Clemmensen Reduction & Wolff-Kishner Reduction', priority: 'Highest' },
+      { name: 'Haloform reaction — iodoform test (CHI3)', priority: 'Highest' },
+      { name: 'Carboxylic acid — preparation and characteristic reactions', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 2,
+    name: 'Hydrocarbons (Alkanes, Alkenes, Alkynes, Benzene)',
+    weightage: '6–8%',
+    desc: 'Electrophilic addition, free radical, EAS directing effects — all high frequency.',
+    resources: ['MS Chauhan', 'NCERT 11 Ch13-14'],
+    subtopics: [
+      { name: 'Free radical halogenation of alkanes — selectivity order', priority: 'Highest' },
+      { name: "Alkene reactions — electrophilic addition mechanism", priority: 'Highest' },
+      { name: "Markovnikov's Rule & Anti-Markovnikov (HBr + peroxide)", priority: 'Highest' },
+      { name: 'Ozonolysis — products identification from structure', priority: 'Highest' },
+      { name: 'Benzene — electrophilic aromatic substitution (EAS)', priority: 'Highest' },
+      { name: 'Directing effects — ortho/para vs meta directors', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 3,
+    name: 'Coordination Compounds',
+    weightage: '6–8%',
+    desc: 'Most important Inorganic chapter. 100% NCERT-based. Learn it once, score every time.',
+    resources: ['NCERT 12 Ch9', 'VK Jaiswal'],
+    subtopics: [
+      { name: "Werner's Theory — primary & secondary valency", priority: 'Highest' },
+      { name: 'IUPAC Nomenclature of complex compounds', priority: 'Highest' },
+      { name: 'Structural isomerism — linkage, ionization, hydrate', priority: 'Highest' },
+      { name: 'Geometric isomerism — cis/trans in square planar & octahedral', priority: 'Highest' },
+      { name: 'Crystal Field Theory (CFT) — crystal field splitting', priority: 'Highest' },
+      { name: 'Magnetic moment — spin-only: μ = √n(n+2) BM', priority: 'Highest' },
+      { name: 'High spin vs low spin complexes — CFSE', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 3,
+    name: 'P-Block Elements (Groups 13–18)',
+    weightage: '6–8%',
+    desc: 'Draw every oxoacid structure. JEE LOVES asking to identify the correct structure.',
+    resources: ['NCERT 11 Ch11, NCERT 12 Ch7', 'VK Jaiswal Inorganic'],
+    subtopics: [
+      { name: 'Group 13: Borax, diborane, orthoboric acid reactions', priority: 'Highest' },
+      { name: 'Group 15: Oxoacids of N and P — draw all structures', priority: 'Highest' },
+      { name: 'Group 16: Allotropes of sulphur, oxoacids of S', priority: 'Highest' },
+      { name: 'Group 17: Interhalogen compounds, oxoacids of Cl', priority: 'Highest' },
+      { name: 'Group 18: Noble gases — preparation and uses', priority: 'High' },
+    ]
+  },
+  {
+    subject: 'chemistry', icon: '🧪', label: 'Chemistry', tier: 3,
+    name: 'Chemical Bonding & Molecular Structure',
+    weightage: '5–8%',
+    desc: 'VSEPR geometry, MOT bond order, hybridization — fast marks if well prepared.',
+    resources: ['NCERT 11 Ch4', 'VK Jaiswal'],
+    subtopics: [
+      { name: 'VSEPR Theory — geometry and shape of molecules', priority: 'Highest' },
+      { name: 'Hybridization — sp, sp2, sp3, sp3d, sp3d2', priority: 'Highest' },
+      { name: 'MOT — bond order, magnetic nature of molecules', priority: 'Highest' },
+      { name: 'Dipole moment — polar vs nonpolar', priority: 'Highest' },
+      { name: 'Hydrogen bonding — inter vs intramolecular effects', priority: 'Highest' },
+    ]
+  },
+
+  // ============ MATHEMATICS ============
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', expertTag: 'Dr. Rajan Sinha — Mathematics Resource Person', tier: 1,
+    name: 'Integration (Indefinite + Definite)',
+    weightage: '12–15%',
+    desc: 'KING of JEE Maths. Spend 20% of your Math time here. Highest weightage chapter.',
+    resources: ['Cengage Integration', 'Arihant Skills'],
+    subtopics: [
+      { name: 'All standard integration formulas', priority: 'Highest' },
+      { name: 'Substitution method — simple & complex cases', priority: 'Highest' },
+      { name: 'Integration by parts — ILATE rule', priority: 'Highest' },
+      { name: 'Partial fractions — all four types', priority: 'Highest' },
+      { name: 'Properties of definite integrals (P0–P6)', priority: 'Critical' },
+      { name: 'King property: ∫f(x)dx = ∫f(a+b-x)dx', priority: 'Critical' },
+      { name: 'Even-odd function properties in definite integration', priority: 'Highest' },
+      { name: 'Leibniz rule — differentiation under integral sign', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 1,
+    name: 'Limits, Continuity & Differentiability',
+    weightage: '6–8%',
+    desc: 'Foundation for all calculus. Without LCD, integration and DEs won\'t click.',
+    resources: ['Cengage Calculus', 'Arihant Problems in Calculus'],
+    subtopics: [
+      { name: 'Indeterminate forms — 0/0, ∞/∞, 1^∞, 0^0', priority: 'Highest' },
+      { name: "L'Hôpital's Rule", priority: 'Highest' },
+      { name: 'Standard limits: lim sinx/x=1, lim(1+1/n)^n=e', priority: 'Highest' },
+      { name: 'Continuity at a point — left/right limit check', priority: 'Highest' },
+      { name: 'Differentiability — relation with continuity', priority: 'Highest' },
+      { name: 'Differentiability of |x|, |sinx|, fractional part functions', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 1,
+    name: 'Application of Derivatives (AoD)',
+    weightage: '8–10%',
+    desc: '2–3 questions every year. Maxima-minima is the goldmine.',
+    resources: ['Cengage Calculus', 'Arihant'],
+    subtopics: [
+      { name: 'Chain rule, product rule, quotient rule, implicit', priority: 'Highest' },
+      { name: 'Tangent & Normal — equations at a point', priority: 'Highest' },
+      { name: 'Monotonicity — increasing/decreasing intervals', priority: 'Highest' },
+      { name: 'Maxima & Minima — first and second derivative tests', priority: 'Highest' },
+      { name: "Rolle's Theorem & Mean Value Theorem", priority: 'Highest' },
+      { name: 'Parametric and logarithmic differentiation', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 1,
+    name: 'Differential Equations',
+    weightage: '4–6%',
+    desc: 'Variable separable and linear DE cover 80% of questions. Score here easily.',
+    resources: ['Cengage', 'NCERT 12 Ch9'],
+    subtopics: [
+      { name: 'Order & Degree — identification', priority: 'Highest' },
+      { name: 'Variable Separable method', priority: 'Highest' },
+      { name: 'Homogeneous differential equations', priority: 'Highest' },
+      { name: 'Linear DE — Integrating factor method', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 2,
+    name: '3D Geometry',
+    weightage: '8–10%',
+    desc: 'RAPID MARK BOOSTER. 15 key formulas = every question solvable.',
+    resources: ['Cengage 3D Geometry', 'SL Loney'],
+    subtopics: [
+      { name: 'Direction cosines & direction ratios', priority: 'Highest' },
+      { name: 'Equations of a line — vector & Cartesian forms', priority: 'Highest' },
+      { name: 'Equations of a plane — normal vector form', priority: 'Highest' },
+      { name: 'Angle between line & plane, between two planes', priority: 'Highest' },
+      { name: 'Shortest distance between skew lines', priority: 'Highest' },
+      { name: 'Distance of a point from a plane', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 2,
+    name: 'Circles & Conic Sections',
+    weightage: '6–8%',
+    desc: 'Tangents, normals, chords — predictable questions with clear patterns.',
+    resources: ['SL Loney Coordinate Geometry', 'Cengage'],
+    subtopics: [
+      { name: 'General equation of circle — tangent, normal', priority: 'Highest' },
+      { name: 'Chord of contact, family of circles', priority: 'Highest' },
+      { name: 'Parabola y²=4ax — focus, directrix, parametric form (at², 2at)', priority: 'Highest' },
+      { name: 'Normals to parabola — 3 normals from a point', priority: 'Highest' },
+      { name: 'Ellipse — standard form, eccentricity, tangent & normal', priority: 'Highest' },
+      { name: 'Rectangular hyperbola: xy = c²', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 2,
+    name: 'Straight Lines & Coordinate Geometry',
+    weightage: '4–6%',
+    desc: 'Distance, angle, family of lines — all formula-driven and highly predictable.',
+    resources: ['SL Loney', 'NCERT 11 Ch10'],
+    subtopics: [
+      { name: 'Various forms of line equation — slope-intercept, normal form', priority: 'Highest' },
+      { name: 'Angle between two lines', priority: 'Highest' },
+      { name: 'Distance of a point from a line', priority: 'Highest' },
+      { name: 'Family of lines — one parameter', priority: 'Highest' },
+      { name: 'Foot of perpendicular, image of a point in a line', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 3,
+    name: 'Matrices & Determinants',
+    weightage: '6–8%',
+    desc: 'EASIEST HIGH-SCORER. Learn the formulas and score 100% here reliably.',
+    resources: ['Cengage Algebra', 'NCERT 12 Ch3-4'],
+    subtopics: [
+      { name: 'Types of matrices — symmetric, skew-symmetric, orthogonal', priority: 'Highest' },
+      { name: 'Matrix multiplication — rules and applications', priority: 'Highest' },
+      { name: 'Transpose, Adjoint, Inverse — formulas', priority: 'Highest' },
+      { name: 'Properties of Determinants — cofactor expansion', priority: 'Highest' },
+      { name: "Solving linear equations — Cramer's rule", priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 3,
+    name: 'Probability',
+    weightage: '5–8%',
+    desc: 'Bayes theorem + binomial distribution cover 80% of JEE probability questions.',
+    resources: ['Cengage', 'NCERT 12 Ch13'],
+    subtopics: [
+      { name: 'Conditional probability — P(A|B)', priority: 'Highest' },
+      { name: "Bayes' Theorem — posterior probability", priority: 'Highest' },
+      { name: 'Binomial distribution — mean = np, variance = npq', priority: 'Highest' },
+      { name: 'Addition & Multiplication rules for events', priority: 'Highest' },
+    ]
+  },
+  {
+    subject: 'math', icon: '📐', label: 'Mathematics', tier: 3,
+    name: 'Vectors & Complex Numbers',
+    weightage: '5–7% each',
+    desc: 'Formula-driven chapters. Scalar triple product and De Moivre are JEE favorites.',
+    resources: ['Cengage', 'NCERT 12 Ch10-11'],
+    subtopics: [
+      { name: 'Dot product — geometric meaning, projection formula', priority: 'Highest' },
+      { name: 'Cross product — area of parallelogram/triangle', priority: 'Highest' },
+      { name: 'Scalar triple product — volume of parallelepiped', priority: 'Highest' },
+      { name: 'Modulus & Argument — Argand plane representation', priority: 'Highest' },
+      { name: "De Moivre's Theorem — nth powers and roots", priority: 'Highest' },
+      { name: 'nth roots of unity — sum properties', priority: 'Highest' },
+    ]
+  },
+];
+
+let currentWeightageFilter = 'all';
+
+function renderWeightage() {
+  const container = document.getElementById('weightage-content');
+  if (!container) return;
+
+  const filtered = currentWeightageFilter === 'all'
+    ? WEIGHTAGE_DATA
+    : WEIGHTAGE_DATA.filter(c => c.subject === currentWeightageFilter);
+
+  // Group by subject
+  const subjects = ['physics', 'chemistry', 'math'];
+  const subjectMeta = {
+    physics:   { label: '⚡ Physics',     accent: 'var(--physics)',   cls: 'expert-physics',   expertTag: 'Dr. Arjun Mehta — Physics Resource Person' },
+    chemistry: { label: '🧪 Chemistry',  accent: 'var(--chemistry)', cls: 'expert-chemistry', expertTag: 'Dr. Priya Nair — Chemistry Resource Person' },
+    math:      { label: '📐 Mathematics', accent: 'var(--math)',      cls: 'expert-math',      expertTag: 'Dr. Rajan Sinha — Mathematics Resource Person' },
+  };
+
+  const tiers = { 1: { label: '🔴 Tier 1 — Must Master', cls: 'tier-1', cardCls: 'tier-1-card' },
+                  2: { label: '🟡 Tier 2 — High Value',  cls: 'tier-2', cardCls: 'tier-2-card' },
+                  3: { label: '🟢 Tier 3 — Score Booster', cls: 'tier-3', cardCls: 'tier-3-card' } };
+
+  let html = '';
+  const subjectsToShow = currentWeightageFilter === 'all' ? subjects : [currentWeightageFilter];
+
+  subjectsToShow.forEach(subj => {
+    const items = filtered.filter(c => c.subject === subj);
+    if (!items.length) return;
+
+    const meta = subjectMeta[subj];
+    html += `<div class="wt-subject-block">
+      <div class="wt-subject-header">
+        <span class="wt-subject-label" style="color:${meta.accent}">${meta.label}</span>
+        <span class="wt-expert-tag ${meta.cls}">${meta.expertTag}</span>
+      </div>`;
+
+    [1, 2, 3].forEach(tier => {
+      const tierItems = items.filter(c => c.tier === tier);
+      if (!tierItems.length) return;
+      const t = tiers[tier];
+      html += `<div class="wt-tier-label ${t.cls}">${t.label}</div>`;
+      html += `<div class="wt-chapters-grid">`;
+      tierItems.forEach((ch, idx) => {
+        const cardId = `wt-${subj}-${ch.name.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9-]/g,'')}-${idx}`;
+        const subtopicsHtml = ch.subtopics.map(s => {
+          const pCls = s.priority === 'Critical' ? 'priority-critical' : s.priority === 'Highest' ? 'priority-highest' : 'priority-high';
+          return `<div class="wt-subtopic-row">
+            <span>${s.name}</span>
+            <span class="wt-subtopic-priority ${pCls}">${s.priority}</span>
+          </div>`;
+        }).join('');
+        const resourcesHtml = ch.resources ? ch.resources.map(r => `<span class="wt-res-tag">${r}</span>`).join('') : '';
+        html += `<div class="wt-chapter-card ${t.cardCls}" id="${cardId}" onclick="toggleWtCard('${cardId}')">
+          <div class="wt-chapter-top">
+            <span class="wt-chapter-name">${ch.name}</span>
+            <div class="wt-chapter-meta">
+              <span class="wt-weightage-pill">${ch.weightage}</span>
+              <div class="wt-tier-dot"></div>
+            </div>
+          </div>
+          <div class="wt-chapter-desc">${ch.desc}</div>
+          <div class="wt-chapter-expand-hint">👆 Tap to see subtopics & resources</div>
+          <div class="wt-subtopics">
+            <div class="wt-subtopics-title">Subtopics</div>
+            ${subtopicsHtml}
+            ${resourcesHtml ? `<div class="wt-resources">${resourcesHtml}</div>` : ''}
+          </div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function toggleWtCard(id) {
+  const card = document.getElementById(id);
+  if (card) card.classList.toggle('expanded');
+}
+
+function filterWeightage(subj) {
+  currentWeightageFilter = subj;
+  document.querySelectorAll('.wt-filter-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('wf-' + subj);
+  if (btn) btn.classList.add('active');
+  renderWeightage();
+}
+
 // ============ EXAM TARGETS & COUNTDOWN ============
 
 const EXAM_TARGETS = {
@@ -1216,6 +1742,7 @@ function init() {
   renderSubject(CHEMISTRY, 'chemistry-content', 'chemistry');
   renderSubject(MATH, 'math-content', 'math');
   renderMilestones();
+  renderWeightage();
   updateStats();
 
   // Animate progress bar on load

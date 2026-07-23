@@ -931,3 +931,275 @@ body {
   .tab-nav { padding: 0.5rem 1rem; }
   .main-content { padding: 2rem 1rem; }
 }
+
+/* ========== WEIGHTAGE TAB ========== */
+
+.tab-btn-weightage {
+  background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,146,60,0.15)) !important;
+  border-color: rgba(251,191,36,0.4) !important;
+  color: var(--yellow) !important;
+}
+.tab-btn-weightage.active, .tab-btn-weightage:hover {
+  background: linear-gradient(135deg, rgba(251,191,36,0.35), rgba(251,146,60,0.3)) !important;
+  box-shadow: 0 0 20px rgba(251,191,36,0.25) !important;
+}
+
+/* Score Target Row */
+.wt-score-target {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 768px) { .wt-score-target { grid-template-columns: repeat(2, 1fr); } }
+
+.wt-score-item {
+  border-radius: 20px;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+.wt-score-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+}
+.wt-score-physics  { background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.3); }
+.wt-score-chemistry{ background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); }
+.wt-score-math     { background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.3); }
+.wt-score-total    { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.3); }
+
+.wt-score-subject {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+}
+.wt-score-range {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+}
+.wt-score-physics  .wt-score-range { color: var(--physics); }
+.wt-score-chemistry .wt-score-range { color: var(--chemistry); }
+.wt-score-math     .wt-score-range { color: var(--math); }
+.wt-score-total    .wt-score-range { color: var(--yellow); }
+.wt-score-label {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Filter Bar */
+.wt-filter-bar {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+}
+.wt-filter-btn {
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text-muted);
+  transition: var(--transition);
+  font-family: inherit;
+}
+.wt-filter-btn:hover, .wt-filter-btn.active {
+  background: rgba(108,99,255,0.2);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* Chapter Group */
+.wt-subject-block {
+  margin-bottom: 2.5rem;
+}
+.wt-subject-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border2);
+}
+.wt-subject-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.wt-expert-tag {
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.expert-physics { background: rgba(56,189,248,0.15); color: var(--physics); border: 1px solid rgba(56,189,248,0.3); }
+.expert-chemistry { background: rgba(74,222,128,0.15); color: var(--chemistry); border: 1px solid rgba(74,222,128,0.3); }
+.expert-math { background: rgba(167,139,250,0.15); color: var(--math); border: 1px solid rgba(167,139,250,0.3); }
+
+/* Chapter Cards Grid */
+.wt-chapters-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.wt-tier-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tier-1 { background: rgba(248,113,113,0.12); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+.tier-2 { background: rgba(251,191,36,0.12); color: var(--yellow); border: 1px solid rgba(251,191,36,0.3); }
+.tier-3 { background: rgba(74,222,128,0.12); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
+
+.wt-chapter-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.4rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.wt-chapter-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+.wt-chapter-card.tier-1-card::before { background: var(--red); }
+.wt-chapter-card.tier-2-card::before { background: var(--yellow); }
+.wt-chapter-card.tier-3-card::before { background: var(--green); }
+.wt-chapter-card:hover {
+  border-color: var(--border2);
+  transform: translateX(4px);
+  background: var(--card2);
+}
+
+.wt-chapter-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+.wt-chapter-name {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--text);
+  flex: 1;
+}
+.wt-chapter-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.wt-weightage-pill {
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(108,99,255,0.15);
+  color: var(--accent2);
+  border: 1px solid rgba(108,99,255,0.25);
+}
+.wt-tier-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.tier-1-card .wt-tier-dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.tier-2-card .wt-tier-dot { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+.tier-3-card .wt-tier-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+.wt-chapter-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+/* Subtopics List inside card */
+.wt-subtopics {
+  display: none;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+.wt-chapter-card.expanded .wt-subtopics { display: block; }
+.wt-subtopics-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.wt-subtopic-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.82rem;
+  color: var(--text);
+}
+.wt-subtopic-row:last-child { border-bottom: none; }
+.wt-subtopic-priority {
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.priority-highest { background: rgba(248,113,113,0.15); color: var(--red); }
+.priority-high { background: rgba(251,191,36,0.15); color: var(--yellow); }
+.priority-critical { background: rgba(248,113,113,0.3); color: #ff4444; border: 1px solid rgba(248,113,113,0.5); }
+
+.wt-chapter-expand-hint {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
+}
+.wt-chapter-card.expanded .wt-chapter-expand-hint { display: none; }
+
+/* Resources row */
+.wt-resources {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+.wt-res-tag {
+  font-size: 0.68rem;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(56,189,248,0.1);
+  color: var(--accent3);
+  border: 1px solid rgba(56,189,248,0.2);
+}
+

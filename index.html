@@ -112,6 +112,7 @@
     <button class="tab-btn" id="btn-chemistry" onclick="switchTab('chemistry')">🧪 Chemistry</button>
     <button class="tab-btn" id="btn-math" onclick="switchTab('math')">📐 Math</button>
     <button class="tab-btn" id="btn-milestones" onclick="switchTab('milestones')">🏆 Milestones</button>
+    <button class="tab-btn tab-btn-weightage" id="btn-weightage" onclick="switchTab('weightage')">⚖️ Weightage</button>
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -368,6 +369,49 @@
         <p>Big goals on the journey to 99 percentile. Mark each one as you crush it.</p>
       </div>
       <div class="milestones-grid" id="milestones-grid"></div>
+    </section>
+
+    <!-- WEIGHTAGE TAB -->
+    <section class="tab-content" id="tab-weightage">
+      <div class="section-header">
+        <h2>⚖️ Main Weightage — 99 Percentile Intelligence</h2>
+        <p>Research-backed chapter priorities by three subject experts. Red = must master. Yellow = high value. Green = score booster.</p>
+      </div>
+
+      <!-- SCORE TARGET CARD -->
+      <div class="wt-score-target">
+        <div class="wt-score-item wt-score-physics">
+          <div class="wt-score-subject">⚡ Physics</div>
+          <div class="wt-score-range">55–65 / 100</div>
+          <div class="wt-score-label">Target Score</div>
+        </div>
+        <div class="wt-score-item wt-score-chemistry">
+          <div class="wt-score-subject">🧪 Chemistry</div>
+          <div class="wt-score-range">70–80 / 100</div>
+          <div class="wt-score-label">Highest Scorer</div>
+        </div>
+        <div class="wt-score-item wt-score-math">
+          <div class="wt-score-subject">📐 Math</div>
+          <div class="wt-score-range">60–70 / 100</div>
+          <div class="wt-score-label">Target Score</div>
+        </div>
+        <div class="wt-score-item wt-score-total">
+          <div class="wt-score-subject">🎯 Total</div>
+          <div class="wt-score-range">185–215 / 300</div>
+          <div class="wt-score-label">= 99+ Percentile</div>
+        </div>
+      </div>
+
+      <!-- SUBJECT FILTER -->
+      <div class="wt-filter-bar">
+        <button class="wt-filter-btn active" onclick="filterWeightage('all')" id="wf-all">All Subjects</button>
+        <button class="wt-filter-btn" onclick="filterWeightage('physics')" id="wf-physics">⚡ Physics</button>
+        <button class="wt-filter-btn" onclick="filterWeightage('chemistry')" id="wf-chemistry">🧪 Chemistry</button>
+        <button class="wt-filter-btn" onclick="filterWeightage('math')" id="wf-math">📐 Math</button>
+      </div>
+
+      <!-- WEIGHTAGE CONTENT -->
+      <div id="weightage-content"></div>
     </section>
 
   </main>
