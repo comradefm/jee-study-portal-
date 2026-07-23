@@ -1256,4 +1256,176 @@ body {
 .tb-chem    { background: rgba(74,222,128,0.1);  border-color: rgba(74,222,128,0.3);  color: var(--chemistry); }
 .tb-rev     { background: rgba(108,99,255,0.1);  border-color: rgba(108,99,255,0.3);  color: var(--accent2); }
 
+/* ========== FULL CURRICULUM TAB ========== */
+
+.curr-filter-bar {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.curr-filter-btn {
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text-muted);
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.curr-filter-btn:hover, .curr-filter-btn.active {
+  background: rgba(108,99,255,0.2);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.curr-phase-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 2.5rem;
+}
+
+.curr-phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border2);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.curr-phase-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.curr-phase-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(108,99,255,0.15);
+  color: var(--accent2);
+  border: 1px solid rgba(108,99,255,0.3);
+}
+
+.curr-phase-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.curr-phase-dates {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.curr-ch-card {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.curr-ch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.curr-ch-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.curr-subj-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.curr-tag-math { background: rgba(167,139,250,0.15); color: var(--math); border: 1px solid rgba(167,139,250,0.3); }
+.curr-tag-physics { background: rgba(56,189,248,0.15); color: var(--physics); border: 1px solid rgba(56,189,248,0.3); }
+.curr-tag-chem { background: rgba(74,222,128,0.15); color: var(--chemistry); border: 1px solid rgba(74,222,128,0.3); }
+
+.curr-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .curr-steps-grid { grid-template-columns: 1fr; }
+}
+
+.curr-step-box {
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid transparent;
+}
+
+.step-prereq { background: rgba(251,191,36,0.06); border-color: rgba(251,191,36,0.25); }
+.step-lesson { background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.25); }
+.step-hard { background: rgba(248,113,113,0.06); border-color: rgba(248,113,113,0.25); }
+
+.step-header {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-prereq .step-header { color: var(--yellow); }
+.step-lesson .step-header { color: var(--accent3); }
+.step-hard .step-header { color: var(--red); }
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-list li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.35rem;
+  position: relative;
+  padding-left: 14px;
+}
+
+.step-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+}
+
+
 

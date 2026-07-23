@@ -107,6 +107,7 @@
   <!-- NAV TABS -->
   <nav class="tab-nav">
     <button class="tab-btn active" id="btn-roadmap" onclick="switchTab('roadmap')">🗺 Roadmap</button>
+    <button class="tab-btn" id="btn-curriculum" onclick="switchTab('curriculum')">📖 Full Curriculum</button>
     <button class="tab-btn" id="btn-planner" onclick="switchTab('planner')">📅 Study Plan</button>
     <button class="tab-btn" id="btn-physics" onclick="switchTab('physics')">⚡ Physics</button>
     <button class="tab-btn" id="btn-chemistry" onclick="switchTab('chemistry')">🧪 Chemistry</button>
@@ -504,6 +505,27 @@
 
       <!-- WEIGHTAGE CONTENT -->
       <div id="weightage-content"></div>
+    </section>
+
+    <!-- FULL CURRICULUM TAB -->
+    <section class="tab-content" id="tab-curriculum">
+      <div class="section-header">
+        <h2>📖 Complete Ordered Curriculum (JEE 2027)</h2>
+        <p>Execution Rule: Step 1 = Prerequisites → Step 2 = Chapter Lesson → Step 3 = Hard Problems. Never skip prerequisites!</p>
+      </div>
+
+      <!-- CURRICULUM FILTER BAR -->
+      <div class="curr-filter-bar">
+        <button class="curr-filter-btn active" onclick="filterCurriculum('all')" id="cf-all">All Phases (0 to 6)</button>
+        <button class="curr-filter-btn" onclick="filterCurriculum('phase0')" id="cf-phase0">Phase 0 (Foundation)</button>
+        <button class="curr-filter-btn" onclick="filterCurriculum('phase1')" id="cf-phase1">Phase 1 (Core Build)</button>
+        <button class="curr-filter-btn" onclick="filterCurriculum('phase2')" id="cf-phase2">Phase 2 (Power Build)</button>
+        <button class="curr-filter-btn" onclick="filterCurriculum('phase3')" id="cf-phase3">Phase 3 (Calculus &amp; Reactions)</button>
+        <button class="curr-filter-btn" onclick="filterCurriculum('phase4')" id="cf-phase4">Phase 4 (Integration Month)</button>
+        <button class="curr-filter-btn" onclick="filterCurriculum('phase5')" id="cf-phase5">Phase 5 (PYQ Mode)</button>
+      </div>
+
+      <div id="curriculum-content"></div>
     </section>
 
   </main>

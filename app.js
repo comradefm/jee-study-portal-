@@ -1564,6 +1564,233 @@ function filterWeightage(subj) {
   renderWeightage();
 }
 
+// ============ FULL CURRICULUM DATA & RENDER ============
+
+const CURRICULUM_DATA = [
+  // PHASE 0
+  {
+    phaseKey: 'phase0', phaseTitle: 'Phase 0 — Foundation Sprint', dates: 'Jul 23 – Aug 3 (2 Weeks)',
+    subject: 'math', subjectLabel: '📐 Math Foundation',
+    chapterName: 'Trigonometry & Algebra Foundation',
+    prereqs: ['Basic arithmetic', 'Angle concept (degrees/radians)', '10th class algebra'],
+    lessons: ['Trig ratios & values (0°,30°,45°,60°,90°)', 'Pythagorean identities (sin²θ+cos²θ=1)', 'Compound angles sin(A±B), cos(A±B)', 'Double & half angle formulas', 'Quadratic roots & sum/product α+β=-b/a'],
+    hardProblems: ['Prove complex trig identities', 'Quadratic equation location of roots', 'Solving trig equations in general form']
+  },
+  {
+    phaseKey: 'phase0', phaseTitle: 'Phase 0 — Foundation Sprint', dates: 'Jul 23 – Aug 3 (2 Weeks)',
+    subject: 'chemistry', subjectLabel: '🧪 Chemistry Foundation',
+    chapterName: 'Mole Concept & Atomic Structure',
+    prereqs: ['Basic arithmetic & ratios', 'Element symbols (Z=1 to 30)'],
+    lessons: ['1 mole = 6.022×10²³ particles (NA)', 'Formula n = m/M and gas STP n = V/22.4', 'Molarity (M) & Molality (m) formulas', 'Quantum numbers (n, l, m, s)', 'Aufbau principle & configurations 1 to 30'],
+    hardProblems: ['25 mandatory numericals on mole concept', 'Limiting reagent in multi-step reactions', 'Electronic configuration exceptions (Cr, Cu)']
+  },
+  {
+    phaseKey: 'phase0', phaseTitle: 'Phase 0 — Foundation Sprint', dates: 'Jul 23 – Aug 3 (2 Weeks)',
+    subject: 'physics', subjectLabel: '⚡ Physics Foundation',
+    chapterName: 'Vectors, Kinematics & Newton\'s Laws',
+    prereqs: ['Trigonometry values', 'Scalar vs Vector concept'],
+    lessons: ['Vector components, dot (a·b) & cross (a×b) products', 'Equations of motion (v=u+at, s=ut+½at², v²=u²+2as)', 'Projectile motion range & height formulas', 'Newton\'s 3 Laws & Free Body Diagram (FBD)', 'Static (0≤fs≤μsN) & Kinetic friction (fk=μkN)'],
+    hardProblems: ['Projectile on inclined plane', 'Block-on-block friction problems', 'Atwood machine & complex pulley systems']
+  },
+
+  // PHASE 1
+  {
+    phaseKey: 'phase1', phaseTitle: 'Phase 1 — Core Build', dates: 'Aug 4 – Aug 31 (Month 1)',
+    subject: 'physics', subjectLabel: '⚡ Physics (Tier 2)',
+    chapterName: 'Work, Energy, Power & Rotational Motion',
+    prereqs: ['Newton\'s Laws + FBD ✓', 'Dot & Cross product ✓', 'Work-energy theorem concept'],
+    lessons: ['Work W = ∫F·dx & Work-Energy theorem (W_net = ΔKE)', 'Conservation of Mechanical Energy (KE + PE = const)', 'Torque τ = rF sinθ = Iα & Moment of Inertia values', 'Parallel & perpendicular axis theorems', 'Rolling without slipping (v_cm = Rω)'],
+    hardProblems: ['Variable force work calculation', 'Ice skater angular momentum conservation', 'Disc vs ring vs sphere rolling down incline']
+  },
+  {
+    phaseKey: 'phase1', phaseTitle: 'Phase 1 — Core Build', dates: 'Aug 4 – Aug 31 (Month 1)',
+    subject: 'chemistry', subjectLabel: '🧪 Chemistry (Tier 1)',
+    chapterName: 'Chemical Bonding & GOC (General Organic Chemistry)',
+    prereqs: ['Electronic configuration ✓', 'Valence electrons ✓', 'Hybridization basics'],
+    lessons: ['VSEPR theory shapes & MOT bond order = (BMO-ABMO)/2', 'IUPAC nomenclature & functional group priority', 'Inductive effect (-I, +I) & Resonance structures', 'Hyperconjugation & carbocation stability (3°>2°>1°)', 'Hückel\'s rule (4n+2)π for Aromaticity'],
+    hardProblems: ['Acidity/Basicity comparison using combined effects', 'Identify aromatic vs anti-aromatic structures', 'Draw all resonance structures for complex ions']
+  },
+  {
+    phaseKey: 'phase1', phaseTitle: 'Phase 1 — Core Build', dates: 'Aug 4 – Aug 31 (Month 1)',
+    subject: 'math', subjectLabel: '📐 Math (Tier 2)',
+    chapterName: 'Vectors Deep Dive & 3D Geometry',
+    prereqs: ['Phase 0 Vectors ✓', 'Direction cosines concept', 'Basic 2D geometry'],
+    lessons: ['Section formula & scalar/vector triple product', 'Direction cosines (l²+m²+n²=1) & direction ratios', 'Equations of 3D lines (symmetric & vector forms)', 'Equation of 3D plane (general & intercept form)', 'Shortest distance between skew lines formula'],
+    hardProblems: ['Find unit vector perpendicular to two vectors', 'Plane passing through intersection of two planes', 'Image of a point in a given 3D plane']
+  },
+
+  // PHASE 2
+  {
+    phaseKey: 'phase2', phaseTitle: 'Phase 2 — Power Build', dates: 'Sep 1 – Sep 30 (Month 2)',
+    subject: 'physics', subjectLabel: '⚡ Physics (Tier 1)',
+    chapterName: 'Electrostatics, Capacitance & Current Electricity',
+    prereqs: ['Dot product & vectors ✓', 'Integration ∫F dx ✓', 'Potential difference V'],
+    lessons: ['Coulomb\'s Law F = kq₁q₂/r² & Gauss\'s Law ∮E·dA = Q/ε₀', 'Electric potential V = kq/r & field relation E = -dV/dr', 'Capacitance C = ε₀A/d & energy U = ½CV²', 'Kirchhoff\'s Current (KCL) & Voltage Laws (KVL)', 'Potentiometer null method & Galvanometer conversion'],
+    hardProblems: ['Capacitor network with dielectric inserted', 'Complex circuit with 3+ batteries (KCL+KVL)', 'RC circuit charging/discharging switch problems']
+  },
+  {
+    phaseKey: 'phase2', phaseTitle: 'Phase 2 — Power Build', dates: 'Sep 1 – Sep 30 (Month 2)',
+    subject: 'chemistry', subjectLabel: '🧪 Chemistry (Tier 1)',
+    chapterName: 'Chemical Thermodynamics & Chemical Equilibrium',
+    prereqs: ['Mole concept ✓', 'Balancing equations ✓', 'State functions concept'],
+    lessons: ['First Law ΔU = q + w & Enthalpy ΔH = ΔU + Δn_g RT', 'Hess\'s Law & Gibbs Free Energy ΔG = ΔH - TΔS', 'Gibbs equation ΔG° = -RT ln K (thermo + equilibrium link)', 'Kc and Kp relation: Kp = Kc(RT)^Δn', 'Le Chatelier\'s principle & pH / Henderson-Hasselbalch'],
+    hardProblems: ['Multi-step Hess\'s Law enthalpy calculation', 'Predict spontaneity at various temperatures', 'Buffer solution pH after adding strong acid/base']
+  },
+  {
+    phaseKey: 'phase2', phaseTitle: 'Phase 2 — Power Build', dates: 'Sep 1 – Sep 30 (Month 2)',
+    subject: 'math', subjectLabel: '📐 Math (Tier 1)',
+    chapterName: 'Limits, Continuity, Differentiability & Circles',
+    prereqs: ['All trig identities ✓', 'Factoring & rationalization ✓', 'Slope concept'],
+    lessons: ['Standard limits: sinx/x = 1, (eˣ-1)/x = 1, (1-cosx)/x² = ½', 'L\'Hôpital\'s rule for 0/0 and ∞/∞ indeterminate forms', '1^∞ limit evaluation form: e^[lim g(x)·(f(x)-1)]', 'Continuity & Differentiability (LHD = RHD check)', 'Circle equation x²+y²+2gx+2fy+c=0 & tangent T=0'],
+    hardProblems: ['Complex limit requiring L\'Hôpital multiple times', 'Differentiability of piecewise & modulus functions', 'Common tangents to two circles']
+  },
+
+  // PHASE 3
+  {
+    phaseKey: 'phase3', phaseTitle: 'Phase 3 — Calculus & Reactions', dates: 'Oct 1 – Oct 31 (Month 3)',
+    subject: 'math', subjectLabel: '📐 Math (Tier 1)',
+    chapterName: 'Derivatives, Application of Derivatives & Conics',
+    prereqs: ['LCD (Phase 2) fully completed ✓', 'All standard derivatives ✓'],
+    lessons: ['Chain rule d/dx[f(g(x))] = f\'(g(x))·g\'(x)', 'Tangent & normal equations using slope f\'(x₁)', 'Monotonicity & Maxima/Minima (1st & 2nd derivative tests)', 'Rolle\'s Theorem & LMVT applications', 'Parabola y²=4ax, Ellipse, Hyperbola standard forms'],
+    hardProblems: ['Complex optimization & shortest distance to curve', '3 normals drawn to parabola from a point', 'Roots of equation using Rolle\'s Theorem']
+  },
+  {
+    phaseKey: 'phase3', phaseTitle: 'Phase 3 — Calculus & Reactions', dates: 'Oct 1 – Oct 31 (Month 3)',
+    subject: 'physics', subjectLabel: '⚡ Physics (Tier 2)',
+    chapterName: 'Optics (Ray & Wave) & Physics Thermodynamics',
+    prereqs: ['Trigonometry ✓', 'Snell\'s law ✓', 'Ideal gas law PV=nRT ✓'],
+    lessons: ['Mirror & Thin lens formulas: 1/v - 1/u = 1/f', 'Total Internal Reflection (TIR) & Prism formula', 'Young\'s Double Slit (YDSE) fringe width β = λD/d', 'First Law of Physics Thermo ΔU = Q - W', 'Isothermal, Adiabatic (PV^γ=const) & Carnot efficiency'],
+    hardProblems: ['Combination of lenses with silvered mirror', 'YDSE fringe shift with glass slab inserted', 'Carnot engine efficiency calculations']
+  },
+  {
+    phaseKey: 'phase3', phaseTitle: 'Phase 3 — Calculus & Reactions', dates: 'Oct 1 – Oct 31 (Month 3)',
+    subject: 'chemistry', subjectLabel: '🧪 Chemistry (Tier 1)',
+    chapterName: 'Electrochemistry, Kinetics & Organic Reactions',
+    prereqs: ['Redox balancing ✓', 'Mole concept ✓', 'GOC complete ✓'],
+    lessons: ['Nernst equation E = E° - (0.0592/n) log Q', 'Faraday\'s laws of electrolysis & conductance', 'First order kinetics t½ = 0.693/k & Arrhenius equation', 'Nucleophilic addition to Aldehydes & Ketones', 'Aldol condensation & Cannizzaro reaction'],
+    hardProblems: ['E°cell & ΔG° calculation for complex cell', 'Activation energy calculation from ln k vs 1/T plot', 'Predict organic products in multi-step reactions']
+  },
+
+  // PHASE 4
+  {
+    phaseKey: 'phase4', phaseTitle: 'Phase 4 — Integration Month (KING)', dates: 'Nov 1 – Nov 30 (Month 4)',
+    subject: 'math', subjectLabel: '📐 Math (Tier 1 KING)',
+    chapterName: 'Indefinite & Definite Integration, Area & DE',
+    prereqs: ['All standard derivatives ✓', 'Chain rule ✓', 'Partial fractions ✓'],
+    lessons: ['Standard integration formulas & substitution method', 'Integration by parts (ILATE) & ∫eˣ[f(x)+f\'(x)]dx', 'KING PROPERTY P3: ∫ₐᵇ f(x)dx = ∫ₐᵇ f(a+b-x)dx', 'Property P5: Odd/Even functions definite integrals', 'Differential Equations: Variable separable & Linear IF'],
+    hardProblems: ['Definite integrals evaluated using King property P3', 'Area between two intersecting curves', 'Solving Bernoulli & Linear differential equations']
+  },
+  {
+    phaseKey: 'phase4', phaseTitle: 'Phase 4 — Integration Month (KING)', dates: 'Nov 1 – Nov 30 (Month 4)',
+    subject: 'physics', subjectLabel: '⚡ Physics (Tier 1)',
+    chapterName: 'Modern Physics, EMI & AC Circuits',
+    prereqs: ['Photon energy E=hf ✓', 'Current electricity ✓', 'Magnetic flux ✓'],
+    lessons: ['Photoelectric effect stopping potential & de Broglie λ = h/mv', 'Bohr atom model E_n = -13.6/n² eV & decay N = N₀e^(-λt)', 'Faraday & Lenz laws: EMF = -dΦ/dt & motional EMF = Bvl', 'Self inductance & RLC resonance f_r = 1/(2π√LC)', 'Power factor cos φ = R/Z in AC circuits'],
+    hardProblems: ['Photoelectric effect stopping potential vs frequency', 'Radioactive decay half-life calculations', 'RLC series circuit impedance & resonance']
+  },
+  {
+    phaseKey: 'phase4', phaseTitle: 'Phase 4 — Integration Month (KING)', dates: 'Nov 1 – Nov 30 (Month 4)',
+    subject: 'chemistry', subjectLabel: '🧪 Chemistry (Tier 2/3)',
+    chapterName: 'Coordination Compounds & P-Block Elements',
+    prereqs: ['Chemical bonding ✓', 'Transition metals config ✓'],
+    lessons: ['Werner\'s theory & IUPAC naming of coordination complexes', 'Structural & Geometric (cis/trans) isomerism', 'Crystal Field Theory (CFT) & magnetic moment μ = √n(n+2)', 'Group 15 NH₃ & oxoacids of N and P structures', 'Group 17 interhalogens & oxoacids acidity order'],
+    hardProblems: ['CFT crystal field splitting & high/low spin designation', 'Draw exact structures of P and S oxoacids', 'IUPAC naming of complex coordination ions']
+  },
+
+  // PHASE 5
+  {
+    phaseKey: 'phase5', phaseTitle: 'Phase 5 — PYQ Mode', dates: 'Dec 1 – Dec 31 (Month 5)',
+    subject: 'math', subjectLabel: '📐 Math / All Subjects',
+    chapterName: 'PYQ Marathon & Remaining Chapters',
+    prereqs: ['All core syllabus complete ✓'],
+    lessons: ['Probability (Bayes\' theorem & Binomial distribution)', 'Magnetism, Waves & SHM (Physics)', 'D&F Block, Solutions & Colligative properties (Chem)', 'Last 5 years JEE Mains PYQ solving chapter-wise', '⚠️ ZERO new topics after Dec 15 — 100% PYQ focus!'],
+    hardProblems: ['Bayes\' theorem conditional probability', 'Solve 50+ PYQs per chapter under timed conditions', 'Full length chapter test series']
+  }
+];
+
+let currentCurriculumFilter = 'all';
+
+function renderCurriculum() {
+  const container = document.getElementById('curriculum-content');
+  if (!container) return;
+
+  const filtered = currentCurriculumFilter === 'all'
+    ? CURRICULUM_DATA
+    : CURRICULUM_DATA.filter(item => item.phaseKey === currentCurriculumFilter);
+
+  // Group by phaseKey
+  const phaseKeys = ['phase0', 'phase1', 'phase2', 'phase3', 'phase4', 'phase5'];
+  let html = '';
+
+  phaseKeys.forEach(pk => {
+    const items = filtered.filter(i => i.phaseKey === pk);
+    if (!items.length) return;
+
+    const sample = items[0];
+    html += `
+      <div class="curr-phase-block">
+        <div class="curr-phase-header">
+          <div class="curr-phase-title-wrap">
+            <span class="curr-phase-badge">${sample.phaseKey.toUpperCase()}</span>
+            <span class="curr-phase-title">${sample.phaseTitle}</span>
+          </div>
+          <span class="curr-phase-dates">📅 ${sample.dates}</span>
+        </div>
+    `;
+
+    items.forEach(ch => {
+      const subjTagCls = ch.subject === 'math' ? 'curr-tag-math' : ch.subject === 'physics' ? 'curr-tag-physics' : 'curr-tag-chem';
+      
+      const prereqsHtml = ch.prereqs.map(p => `<li>${p}</li>`).join('');
+      const lessonsHtml = ch.lessons.map(l => `<li>${l}</li>`).join('');
+      const hardHtml = ch.hardProblems.map(h => `<li>${h}</li>`).join('');
+
+      html += `
+        <div class="curr-ch-card">
+          <div class="curr-ch-header">
+            <div class="curr-ch-title">
+              <span>${ch.chapterName}</span>
+            </div>
+            <span class="curr-subj-tag ${subjTagCls}">${ch.subjectLabel}</span>
+          </div>
+
+          <div class="curr-steps-grid">
+            <!-- STEP 1: PREREQUISITES -->
+            <div class="curr-step-box step-prereq">
+              <div class="step-header">⚠️ Step 1: Prerequisites</div>
+              <ul class="step-list">${prereqsHtml}</ul>
+            </div>
+
+            <!-- STEP 2: LESSON -->
+            <div class="curr-step-box step-lesson">
+              <div class="step-header">📚 Step 2: Chapter Lesson</div>
+              <ul class="step-list">${lessonsHtml}</ul>
+            </div>
+
+            <!-- STEP 3: HARD PROBLEMS -->
+            <div class="curr-step-box step-hard">
+              <div class="step-header">🔥 Step 3: Hard Problems</div>
+              <ul class="step-list">${hardHtml}</ul>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function filterCurriculum(phaseKey) {
+  currentCurriculumFilter = phaseKey;
+  document.querySelectorAll('.curr-filter-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('cf-' + phaseKey);
+  if (btn) btn.classList.add('active');
+  renderCurriculum();
+}
+
 // ============ EXAM TARGETS & COUNTDOWN ============
 
 const EXAM_TARGETS = {
@@ -1743,6 +1970,7 @@ function init() {
   renderSubject(MATH, 'math-content', 'math');
   renderMilestones();
   renderWeightage();
+  renderCurriculum();
   updateStats();
 
   // Animate progress bar on load
