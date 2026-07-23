@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jee-2027-cache-v4';
+const CACHE_NAME = 'jee-2027-cache-v5';
 const ASSETS = [
   './',
   './index.html',

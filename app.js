@@ -1929,19 +1929,19 @@ function updateStats() {
     } else if (missedDays > 1) {
       badgeEl.className = 'pace-badge pace-behind';
       badgeEl.textContent = '⚡ Pace Auto-Redistributed';
-      msgEl.innerHTML = `<strong>Notice:</strong> You haven't checked off topics for ${missedDays} days. Your remaining ${remainingCount} chapters have been auto-redistributed across your ${daysLeft} remaining days. New daily target: <strong>${dailyPace} chapters/day</strong> (~${weeklyPace}/week).`;
-    } else if (parseFloat(dailyPace) <= 0.4) {
+      msgEl.innerHTML = `<strong>⚡ Dynamic Recalculation Alert:</strong> You didn't check off topics for <strong>${missedDays} days</strong>! Don't worry — your remaining ${remainingCount} chapters have been dynamically redistributed across the ${daysLeft} days left until exam. Your new required pace is <strong>${dailyPace} chapters/day</strong> (~${weeklyPace}/week). Focus on Tier 1 high-weightage topics first!`;
+    } else if (parseFloat(dailyPace) <= 0.3) {
       badgeEl.className = 'pace-badge pace-on-track';
-      badgeEl.textContent = '🟢 On Track';
-      msgEl.textContent = `You are on a comfortable pace! Covering ~${weeklyPace} chapters per week will finish your entire syllabus before your target exam date.`;
-    } else if (parseFloat(dailyPace) <= 0.7) {
+      badgeEl.textContent = '🟢 Smooth Pace';
+      msgEl.textContent = `You are ahead of schedule! Covering ~${weeklyPace} chapters per week will complete your full JEE syllabus before target date with ample time for mocks.`;
+    } else if (parseFloat(dailyPace) <= 0.6) {
       badgeEl.className = 'pace-badge pace-moderate';
-      badgeEl.textContent = '🟡 Moderate Pace';
-      msgEl.textContent = `Target set: You need ${dailyPace} chapters/day (${weeklyPace} per week). Stay consistent with your daily study planner to maintain 99 percentile momentum!`;
+      badgeEl.textContent = '🟡 Steady Momentum';
+      msgEl.textContent = `Current pace target: ${dailyPace} chapters/day (${weeklyPace}/week). Every missed day automatically recalculates this pace so you never fall permanently behind.`;
     } else {
       badgeEl.className = 'pace-badge pace-behind';
-      badgeEl.textContent = '🔴 High Speed Required';
-      msgEl.textContent = `Heads up! To complete the remaining ${remainingCount} chapters on time, your target is ${dailyPace} chapters/day (${weeklyPace}/week). Focus on high-weightage topics first!`;
+      badgeEl.textContent = '🔴 High Pace Required';
+      msgEl.innerHTML = `<strong>Pace Boost Required:</strong> To finish all ${remainingCount} remaining chapters by exam date, your target is <strong>${dailyPace} chapters/day</strong> (${weeklyPace}/week). Follow the 📖 Full Curriculum prerequisites to study in priority order!`;
     }
   }
 }
